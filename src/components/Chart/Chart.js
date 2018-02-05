@@ -9,17 +9,38 @@
  */
 
 import React from 'react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Chart.css';
-// import mkdata from './mkdata.json';
+import data from './mkdata.json';
 
 const Chart: Function = (): React$Element<any> => (
   <div className={s.root}>
     <div className={s.container}>
-      ChART COMPONENT Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-      Ab alias, accusamus praesentium cumque obcaecati unde tempora, excepturi
-      autem dolores quas quidem neque fugit, libero tenetur ducimus expedita eos
-      deserunt delectus.
+      <LineChart width={600} height={300}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="d" type="category" allowDuplicatedCategory={false} />
+        <YAxis dataKey="v" />
+        <Tooltip />
+        <Legend />
+        {data.mktData.map((serie: Object): Reac$Element<any> => (
+          <Line
+            dot={false}
+            dataKey="v"
+            data={serie.timeSeries.entries}
+            name={serie.instrumentId}
+            key={serie.instrumentId}
+          />
+        ))}
+      </LineChart>
     </div>
   </div>
 );
