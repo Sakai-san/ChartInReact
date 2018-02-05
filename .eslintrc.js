@@ -32,6 +32,20 @@ module.exports = {
   },
 
   rules: {
+    'max-len': [1, 120],
+    'flowtype/require-variable-type': [
+      2,
+      {
+        excludeVariableMatch: '^_',
+      },
+    ],
+    'flowtype/require-parameter-type': 2,
+    'flowtype/require-return-type': [
+      2,
+      'always',
+      { annotateUndefined: 'always' },
+    ],
+
     // Forbid the use of extraneous packages
     // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
     'import/no-extraneous-dependencies': ['error', { packageDir: '.' }],

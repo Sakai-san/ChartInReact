@@ -1,4 +1,5 @@
 /**
+ * @flow
  * React Starter Kit (https://www.reactstarterkit.com/)
  *
  * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
@@ -8,31 +9,24 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // external-global styles must be imported in your JS.
 import normalizeCss from 'normalize.css';
 import s from './Layout.css';
+import Chart from '../Chart';
 import Header from '../Header';
-import Feedback from '../Feedback';
-import Footer from '../Footer';
 
-class Layout extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
+type LayoutProps = {
+  children: React$Element<any>,
+};
 
-  render() {
-    return (
-      <div>
-        <Header />
-        {this.props.children}
-        <Feedback />
-        <Footer />
-      </div>
-    );
-  }
-}
+const Layout: Function = ({ children }: LayoutProps): React$Element<any> => (
+  <div>
+    <Chart />
+    <Header />
+    {children}
+  </div>
+);
 
 export default withStyles(normalizeCss, s)(Layout);
