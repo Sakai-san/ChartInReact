@@ -27,7 +27,12 @@ const Chart: Function = (): React$Element<any> => (
     <div className={s.container}>
       <LineChart width={600} height={300}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="d" type="category" allowDuplicatedCategory={false} />
+        <XAxis
+          hide
+          dataKey="d"
+          type="category"
+          allowDuplicatedCategory={false}
+        />
         <YAxis dataKey="v" />
         <Tooltip />
         <Legend />
