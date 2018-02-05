@@ -18,12 +18,24 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
+import { withHandlers, compose, withState } from 'recompose';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Chart.css';
 import data from './mkdata.json';
 
-const Chart: Function = (): React$Element<any> => (
+type ChartProps = {
+  sliderChangeHandler: Function,
+  sliderValue: number, // eslint-disable-line react/no-unused-prop-types
+  setSliderValue: Function, // eslint-disable-line react/no-unused-prop-types
+};
+
+const Chart: Function = ({
+  sliderValue,
+  sliderChangeHandler,
+}: ChartProps): React$Element<any> => (
   <div className={s.root}>
+    <input onChange={sliderChangeHandler} type="range" />
+    <span className={s.factor}>factor: {sliderValue}</span>
     <div className={s.container}>
       <LineChart width={600} height={300}>
         <CartesianGrid strokeDasharray="3 3" />
@@ -40,7 +52,14 @@ const Chart: Function = (): React$Element<any> => (
           <Line
             dot={false}
             dataKey="v"
-            data={serie.timeSeries.entries}
+            data={
+              sliderValue !== 1
+                ? serie.timeSeries.entries.map((entry: Object): Object => ({
+                    d: entry.d,
+                    v: entry.v * sliderValue,
+                  }))
+                : serie.timeSeries.entries
+            }
             name={serie.instrumentId}
             key={serie.instrumentId}
           />
@@ -50,4 +69,14 @@ const Chart: Function = (): React$Element<any> => (
   </div>
 );
 
-export default withStyles(s)(Chart);
+const extendWithHandlers: Function = withHandlers({
+  sliderChangeHandler: (props: ChartProps): Function => (
+    event: SyntheticEvent,
+  ): void => props.setSliderValue(parseInt(event.target.value, 10)),
+});
+
+export default withStyles(s)(
+  compose(withState('sliderValue', 'setSliderValue', 1), extendWithHandlers)(
+    Chart,
+  ),
+);
