@@ -37,34 +37,36 @@ const Chart: Function = ({
     <input onChange={sliderChangeHandler} type="range" />
     <span className={s.factor}>factor: {sliderValue}</span>
     <div className={s.container}>
-      <LineChart width={600} height={300}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          hide
-          dataKey="d"
-          type="category"
-          allowDuplicatedCategory={false}
-        />
-        <YAxis dataKey="v" />
-        <Tooltip />
-        <Legend />
-        {data.mktData.map((serie: Object): Reac$Element<any> => (
-          <Line
-            dot={false}
-            dataKey="v"
-            data={
-              sliderValue !== 1
-                ? serie.timeSeries.entries.map((entry: Object): Object => ({
-                    d: entry.d,
-                    v: entry.v * sliderValue,
-                  }))
-                : serie.timeSeries.entries
-            }
-            name={serie.instrumentId}
-            key={serie.instrumentId}
+      <div className={s.banner}>
+        <LineChart width={600} height={300}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            hide
+            dataKey="d"
+            type="category"
+            allowDuplicatedCategory={false}
           />
-        ))}
-      </LineChart>
+          <YAxis dataKey="v" />
+          <Tooltip />
+          <Legend />
+          {data.mktData.map((serie: Object): Reac$Element<any> => (
+            <Line
+              dot={false}
+              dataKey="v"
+              data={
+                sliderValue !== 1
+                  ? serie.timeSeries.entries.map((entry: Object): Object => ({
+                      d: entry.d,
+                      v: entry.v * sliderValue,
+                    }))
+                  : serie.timeSeries.entries
+              }
+              name={serie.instrumentId}
+              key={serie.instrumentId}
+            />
+          ))}
+        </LineChart>
+      </div>
     </div>
   </div>
 );
