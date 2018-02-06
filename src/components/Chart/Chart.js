@@ -34,7 +34,7 @@ const Chart: Function = ({
   sliderChangeHandler,
 }: ChartProps): React$Element<any> => (
   <div className={s.root}>
-    <input onChange={sliderChangeHandler} type="range" />
+    <input onChange={sliderChangeHandler} value={sliderValue} type="range" />
     <span className={s.factor}>factor: {sliderValue}</span>
     <div className={s.container}>
       <div className={s.banner}>
