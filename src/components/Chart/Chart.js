@@ -29,6 +29,15 @@ type ChartProps = {
   setSliderValue: Function, // eslint-disable-line react/no-unused-prop-types
 };
 
+const COLORS: Array<string> = [
+  '#84A5EE',
+  '#8585D9',
+  '#D3EB50',
+  '#ABDB69',
+  '#8BC79C',
+  '#94CFE2',
+];
+
 const Chart: Function = ({
   sliderValue,
   sliderChangeHandler,
@@ -49,7 +58,7 @@ const Chart: Function = ({
           <YAxis dataKey="v" />
           <Tooltip />
           <Legend />
-          {data.mktData.map((serie: Object): Reac$Element<any> => (
+          {data.mktData.map((serie: Object, i: number): Rect$Element<any> => (
             <Line
               dot={false}
               dataKey="v"
@@ -63,6 +72,7 @@ const Chart: Function = ({
               }
               name={serie.instrumentId}
               key={serie.instrumentId}
+              stroke={COLORS[i]}
             />
           ))}
         </LineChart>
