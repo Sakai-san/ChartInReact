@@ -50,7 +50,7 @@ const Chart: Function = ({
         <LineChart width={600} height={300}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
-            hide
+            interval={450}
             dataKey="d"
             type="category"
             allowDuplicatedCategory={false}
