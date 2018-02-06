@@ -18,7 +18,7 @@ const remote = {
   name: 'github',
   url: 'https://github.com/Sakai-san/ChartInReact.git',
   branch: 'gh-pages',
-  website: 'https://Sakai-san.github.io/ChartInReact/',
+  website: 'https://sakai-san.github.io/ChartInReact/',
   static: true,
 };
 
