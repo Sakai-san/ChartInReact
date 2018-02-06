@@ -15,17 +15,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import normalizeCss from 'normalize.css';
 import s from './Layout.css';
 import Chart from '../Chart';
-import Header from '../Header';
 
-type LayoutProps = {
-  children: React$Element<any>,
-};
-
-const Layout: Function = ({ children }: LayoutProps): React$Element<any> => (
+const Layout: Function = (): React$Element<any> => (
   <div>
     <Chart />
-    <Header />
-    {children}
   </div>
 );
 
